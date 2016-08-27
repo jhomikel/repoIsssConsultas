@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="60">
+
+  <title>Dashboard: Tareas en proceso</title>
+  <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="canonical" href="/tareas/tareas-proceso.html">
+  <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
+</head>
+
+
+	<body>
+
+		<div id="sidr">
+	<ul>
+		<li><a href="" id="close-menu-inside"><span class="glyphicon glyphicon-remove"></span></a></li><li><a href=""></a></li>
+	</ul>
+	<ul>
+		<li><h2><span class="glyphicon glyphicon-edit"></span> Tareas</h2></li>
+        <li><a href="tareas-pendientes.html">Tareas pendientes</a></li>
+        <li><a href="tareas-proceso.html">Tareas en proceso</a></li>
+	</ul>
+	<ul id="procesorenovaciones">
+		<!--<li><h2><span class="glyphicon glyphicon-cog"></span> Procesos</h2></li>
+		<li><a href="../renovaciones/01-busqueda-clientes.html">Renovaciones</a></li>-->
+	</ul>
+	<ul class="visible-xs-block">
+		<li><h2><span class="glyphicon glyphicon-cog"></span> Herramientas</h2></li>
+		<li><a href="../index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+        <li><a href="#"><span class="glyphicon glyphicon-alert"></span> Ayuda</a>
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+</ul>
+</div>
+	<div id="overlay"></div>
+
+        <div id="app-header">
+            <a id="simple-menu" class="menu-button" href="#sidr"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+            <img src="../images/logo-s.png" />
+            <a id="dash-bt1" class="dash-bt hidden-xs" href="../index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+            <a id="dash-bt-ayuda" class="dash-bt hidden-xs" href=""><span class="glyphicon glyphicon-alert"></span> Ayuda</a>
+            <a id="dash-bt-salir" class="dash-bt hidden-xs" href="http://172.26.20.122:8080/digicel-renovacion/SvlSalir"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+            <a id="dash-bt-user" class="dash-bt hidden-xs" href=""><span class="glyphicon glyphicon-user"></span> mmayen <span class="grupo">Multiplaza</span></a>
+        </div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="page-header">
+			<div class="col-md-12 main">
+				<div class="row">
+					<div class="col-md-9">
+							<h1>Dashboard: Tareas en proceso</h1>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 main">
+					<div class="main-contents">
+						<div class="table-responsive">
+
+                            <input type="search" class="light-table-filter form-control" data-table="order-table" placeholder="Buscar...">
+
+                            <table class="table table-striped sortable order-table" id="tablaTareas">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Cliente  </th>
+                                        <th>NIT</th>
+                                        <th>Prioridad</th>
+                                        <th>Estado</th>
+                                        <th><span class="glyphicon glyphicon-time"></span> Creado</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+	
+
+</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- JQUERY -->
+        
+<script src="../js/jquery-2.2.3.min.js"></script>
+<!-- BOOTSTRAP , TOUR, MODAL -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-tour.min.js"></script>
+<script src="../js/eModal.min.js"></script>
+<script src="../js/alert.js"></script>
+<!-- MENU LATERAL -->
+<script src="../js/jquery.sidr.js"></script>
+<script src="../js/sidr.script.js"></script>
+<!-- RELOJ -->
+<script src="../js/countid.min.js"></script>
+<script src="../js/timer.js"></script>
+<!-- DIGICEL -->
+        <script src="../js/sorttable.js"></script>
+<script src="../js/funciones.js"></script>
+<script src="../js/renovaciones/bpms.js"></script>
+
+
+        <script>
+
+            (function (document) {
+                'use strict';
+
+                var LightTableFilter = (function (Arr) {
+                    var _input;
+
+                    function _onInputEvent(e) {
+                        _input = e.target;
+                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                        Arr.forEach.call(tables, function (table) {
+                            Arr.forEach.call(table.tBodies, function (tbody) {
+                                Arr.forEach.call(tbody.rows, _filter);
+                            });
+                        });
+                    }
+
+                    function _filter(row) {
+                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                    }
+
+                    return {
+                        init: function () {
+                            var inputs = document.getElementsByClassName('light-table-filter');
+                            Arr.forEach.call(inputs, function (input) {
+                                input.oninput = _onInputEvent;
+                            });
+                        }
+                    };
+                })(Array.prototype);
+
+                document.addEventListener('readystatechange', function () {
+                    if (document.readyState === 'complete') {
+                        LightTableFilter.init();
+                    }
+                });
+
+            })(document);
+
+            $(function () {
+                //cargo las credenciales con las que voy a hacer las llamadas
+                cargaCredenciales();
+                obtieneTareas(window.usuario, 'proceso');
+
+                var $rows = $('#tablaTareas tr');
+                $('#search').keyup(function () {
+                    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+                    $rows.show().filter(function () {
+                        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                        return !~text.indexOf(val);
+                    }).hide();
+                });
+
+                //cambio el usuario de arriba y escondo el link al proceso
+                //$('#dash-bt-user').html('<span class="glyphicon glyphicon-user"></span> ' + window.usuario + '<span class="grupo">Multiplaza</span>');
+                //if (window.usuario == 'mmayen') {
+                //    $('#procesorenovaciones').html('<li><h2><span class="glyphicon glyphicon-cog"></span> Procesos</h2></li><li><a href="../renovaciones/01-busqueda-clientes.html">Renovaciones</a></li>');
+                //}
+            });
+
+        </script>
+
+	</body>
+
+</html>
