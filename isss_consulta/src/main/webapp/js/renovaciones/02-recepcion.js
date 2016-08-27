@@ -41,7 +41,11 @@ $(document).ready(function () {
 
     };
 
-    $("#btnSiguiente").click(botonSiguiente);
+
+    $("#btnSiguiente").click(function iniciarCita(){
+        
+        //botonSiguiente;
+    });
     $("#btnTerminar").click(function () {
         var r = confirm("Esta seguro que desea salir?");
         if (r === true) {
