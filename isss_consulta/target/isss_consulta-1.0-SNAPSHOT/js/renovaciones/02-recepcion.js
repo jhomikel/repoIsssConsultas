@@ -7,6 +7,8 @@ $(document).ready(function () {
    
     var codigoAfiliado = $.urlParam('afiliadoID');
     var varsFrecuentes = "?processid=" + processid + "&afiliadoID=" + codigoAfiliado;
+    var codigoCita = 0;
+    var fecha = new Date();
     
     var fecha = new Date();
     var fechaSttr = '<h2>Cita programada: ' + fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear() + '</h2>';
@@ -25,6 +27,7 @@ $(document).ready(function () {
         html += '<tr><th>ITEM</th>';
         html += '<th>DESCRIPCION</th></tr>';
         $.each(datos, function (i, value) {
+            codigoCita = datos[i].codcita;
             html += '<tr><td>Tipo de cita</td><td>' + datos[i].tipo + '</td></tr>';
             html += '<tr><td>Fecha de la solicitud</td><td>' + datos[i].fechasolicitud + '</td></tr>';
             html += '<tr><td>Fecha de la cita</td><td>' + datos[i].fechacita + '</td></tr>';
@@ -47,18 +50,26 @@ $(document).ready(function () {
         //Recuperar el número del proceso
         
         var processid = 25953;
+        
         var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/1?processid=" + processid,
-            "method": "PUT",
-            "headers": {
-              "content-type": "application/json",
-              "cache-control": "no-cache",
-              "postman-token": "09892ee6-49a1-0fc9-08bd-ee09ef1098cf"
-            },
-            "processData": false,
-            "data": ""
+                "async": true,
+                "crossDomain": true,
+                "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.atencion",
+                "method": "POST",
+                "headers": {
+                  "content-type": "application/json",
+                  "cache-control": "no-cache",
+                  "postman-token": "3075258f-be72-fd00-b378-06db8d7bbe0c"
+                },
+                "processData": false,
+                "data": "{\n\
+                            \"codatencion\":" + processid + ",\n\
+                            \"fechaatencion\":" + fecha.getTime() + ",\n\
+                            \"tipohoja\":\"HOJA SUBSECUENTE\",\n\
+                            \"codcita\":{\n\
+                                \"codcita\":" + codigoCita + "\n\
+                                    }\n\
+                        }"
           }
 
           $.ajax(settings).done(function (response) {
