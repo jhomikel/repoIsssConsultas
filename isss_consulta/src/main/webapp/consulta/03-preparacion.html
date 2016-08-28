@@ -42,7 +42,7 @@
 	<img src="../images/logo-s.png"/>
 	<a id="dash-bt1" class="dash-bt hidden-xs" href="../index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
 	<a id="dash-bt-ayuda" class="dash-bt hidden-xs" href=""><span class="glyphicon glyphicon-alert"></span> Ayuda</a>
-        <a id="dash-bt-salir" class="dash-bt hidden-xs" href="http://172.26.20.122:8080/digicel-renovacion/SvlAbandonar"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+        <a id="dash-bt-salir" class="dash-bt hidden-xs" href="http://192.168.56.102:8080/isss_consulta/SvlAbandonar"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
 	<a id="dash-bt-user" class="dash-bt hidden-xs" href=""><span class="glyphicon glyphicon-user"></span> calvarez </a>
 </div>
 
@@ -96,14 +96,32 @@
 
 
 <div class="row">
-	<div class="col-md-10 col-md-offset-1">
-	<div class="formulario">
-            <div id="historial"></div>
-            <br><br>
-            <div id="resultado"></div>
+    <form action="">
+	<div class="col-md-5 col-md-offset-1">
+            <div id="formulario-renovacion-1" class="form-group">
+		<label for="clientes_BAN">Temperatura (&deg;C)</label>
+		<input class="form-control" type="text" id="Temperatura" name="Temperatura" tabindex="1" />
+		<label for="clientes_nit">Frecuencia Cardiaca (por minuto)</label>
+		<input class="form-control" type="text" id="FC" name="FC" tabindex="2" />
+		<label for="clientes_linea">Frecuencia Respiratoria (por minuto)</label>
+		<input class="form-control" type="text" id="FR" name="FR" tabindex="3" />
+                <label for="clientes_linea">Peso (libras)</label>
+		<input class="form-control" type="text" id="Peso" name="Peso" tabindex="3" />
+                        
+            </div>
+        </div>
 
-	</div>
-	</div>
+        <div class="col-md-5">
+            <div id="formulario-renovacion-1" class="form-group">
+		<label for="clientes_linea">Talla (metros)</label>
+		<input class="form-control" type="text" id="Talla" name="Talla" tabindex="3" />
+                <label for="clientes_linea">T. Sistolica (mmHg)</label>
+		<input class="form-control" type="text" id="TSistolica" name="TSistolica" tabindex="3" />
+                <label for="clientes_linea">T. Diastolica (mmHg)</label>
+		<input class="form-control" type="text" id="TDiastolica" name="TDiastolica" tabindex="3" />
+            </div>
+        </div> 
+    </form>
 </div>
 
 <div class="row">

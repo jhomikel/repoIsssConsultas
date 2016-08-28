@@ -4,8 +4,7 @@ $(document).ready(function () {
     //cargaPaginaIniciaTarea();
     //obtieneNombreCliente(codigoAfiliado);
     //obtieneDetallesInstanciaProceso($.urlParam('processid'));
-
-    var processid = $.urlParam('processid');
+   
     var codigoAfiliado = $.urlParam('afiliadoID');
     var varsFrecuentes = "?processid=" + processid + "&afiliadoID=" + codigoAfiliado;
     
@@ -43,34 +42,28 @@ $(document).ready(function () {
 
 
     $("#btnSiguiente").click(function iniciarCita(){
+        
+        //botonSiguiente;
+        //Recuperar el número del proceso
+        
+        var processid = 25953;
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/1",
+            "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/1?processid=" + processid,
             "method": "PUT",
             "headers": {
               "content-type": "application/json",
               "cache-control": "no-cache",
-              "postman-token": "99091d56-fbcc-77b2-6cdb-cf3364b543b0"
+              "postman-token": "09892ee6-49a1-0fc9-08bd-ee09ef1098cf"
             },
             "processData": false,
-            "data": "{\n\
-                        \"codcita\":1,\n\
-                        \"tipo\": \"ASEGURADO\",\n\
-                        \"fechasolicitud\": 1464825600000,\n\
-                        \"fechacita\": 1472342400000,\n\
-                        \"horacita\": 50400000,\n\
-                        \"clinica\": 1,\n\
-                        \"processid\": 25953,\n\
-                        \"numafiliacion\": 123456789,\n\
-                        \"codmedico\": 123456\n\
-                    }"
+            "data": ""
           }
 
           $.ajax(settings).done(function (response) {
             alert('Cita ingresada satisfactoriamente');
           });
-        //botonSiguiente;
     });
     $("#btnTerminar").click(function () {
         var r = confirm("Esta seguro que desea salir?");
