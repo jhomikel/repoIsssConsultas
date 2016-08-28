@@ -391,28 +391,28 @@ function obtieneTareas(potentialOwner, estado) {
 
 //taskElement es el json completo de la tarea, procVariables son todas las variables del proceso al cual pertenece esa tarea
 function construyeLinea(taskElement, procVariables) {
-    var cod_cliente = procVariables.variables.cod_cliente;
-    var nit_cliente = procVariables.variables.nit_cliente;
-    var nombre_cliente = procVariables.variables.nombreCliente;
+    var cod_afiliado = procVariables.variables.afiliadoID;
+    var dui_afiliado = procVariables.variables.DUI;
+    var nombre_cliente = procVariables.variables.nombreAfiliado;
     var procID = taskElement.processInstanceId;
     var URLtaskForm = taskElement.description;
     var estado = taskElement.status;
     console.log('URL: ' + taskElement.description);
     console.log('processID: ' + procID);
-    console.log('cod_cliente: ' + cod_cliente);
-    console.log('nit_cliente: ' + nit_cliente);
+    console.log('cod_cliente: ' + cod_afiliado);
+    console.log('nit_cliente: ' + dui_afiliado);
     console.log('nombreCliente: ' + nombre_cliente);
     $('#tablaTareas').append($('<tr>').append(
                 '<td>' + taskElement.id + '</td>' +
                 '<td>' + taskElement.name + '</td>' +
-                '<td>' + nombre_cliente + ': ' + cod_cliente + '</td>' +
-                '<td>' + nit_cliente + '</td>' +
+                '<td>' + nombre_cliente + ': ' + cod_afiliado + '</td>' +
+                '<td>' + dui_afiliado + '</td>' +
                 '<td>' + taskElement.priority + '</td>' +
                 '<td>' + (taskElement.status == 'Reserved' || 'Ready' ? 'Pendiente' : 'En Proceso') + '</td>' +
                 '<td>' + formatoFechaISO(taskElement.createdOn) + '</td>'
                     ).attr({
                         'class': 'clickableRow',
-                        'onclick': 'window.location="' + URLtaskForm + '?clientesID=' + cod_cliente + '&processid=' + procID + '&taskID=' + taskElement.id + '&estado=' + estado + '"'
+                        'onclick': 'window.location="' + URLtaskForm + '?clientesID=' + cod_afiliado + '&processid=' + procID + '&taskID=' + taskElement.id + '&estado=' + estado + '"'
                     })
                 );
 }
