@@ -120,6 +120,46 @@ var obtieneTareaPorProceso = function(processID, bandCompletar) {
         },
         error: function () {
             console.log('Error ejecutando metodo obtieneTareaPorProceso');
+            //para pruebas offline de formateo
+            //console.log('pruebas Offline Obtiene Tarea =====');
+            //var json = {
+            //    "status": null,
+            //    "url": null,
+            //    "index": null,
+            //    "commandName": null,
+            //    "taskSummaryList": [
+            //       {
+            //           "@class": "org.kie.services.client.serialization.jaxb.impl.task.JaxbTaskSummary",
+            //           "id": 801,
+            //           "name": "Tarea 1",
+            //           "subject": "",
+            //           "description": "",
+            //           "status": "Reserved",
+            //           "priority": 0,
+            //           "skipable": true,
+            //           "actualOwnerId": "bpmadmin",
+            //           "createdById": "bpmadmin",
+            //           "createdOn": 1463584786190,
+            //           "activationTime": 1463584786190,
+            //           "expirationTime": null,
+            //           "processInstanceId": 26243,
+            //           "processId": "ejemploSubida.demoAPI2",
+            //           "processSessionId": 546,
+            //           "deploymentId": "bpmDemostracion:ejemploSubida:1.0",
+            //           "quickTaskSummary": false,
+            //           "parentId": -1,
+            //           "potentialOwners": null
+            //       }
+            //    ],
+            //    "pageNumber": null,
+            //    "pageSize": null
+            //};
+            //$.each(json.taskSummaryList, function (index, element) {
+            //    if (element.status == 'Reserved') {
+            //        console.log('Iniciando tarea encontrada con ID=' + element.id);
+            //        iniciaTarea(element.id, processID, bandCompletar);
+            //    }
+            //});
         }
     })
 }
@@ -147,9 +187,9 @@ var iniciaTarea = function(tareaID, processID, bandCompletar) {//if bandCompleta
             if (bandCompletar == 1) {
                 console.log('completando tarea recien iniciada...');
                 var parametros = {
-                    "map_numeroAfiliacion": '"' + $('#clientes_numeroAfiliacion').val() + '"',
-                    "map_DUI": '"' + $('#clientes_DUI').val() + '"',
-                    "map_nombreAfiliado": '"' + $('#clientes_nombreAfiliado').val() + '"'
+                    "map_cod_cliente": '"' + $('#clientes_clienteId').val() + '"',
+                    "map_nit_cliente": '"' + $('#clientes_nithidden').val() + '"',
+                    "map_nombreCliente": '"' + $('#clientes_nombrehidden').val() + '"'
                 };
                 completaTarea(tareaID, processID, parametros, bandCompletar);
             }
@@ -351,9 +391,9 @@ function obtieneTareas(potentialOwner, estado) {
 
 //taskElement es el json completo de la tarea, procVariables son todas las variables del proceso al cual pertenece esa tarea
 function construyeLinea(taskElement, procVariables) {
-    var cod_afiliacion = procVariables.variables.numeroAfiliacion;
-    var dui_cliente = procVariables.variables.DUI;
-    var nombre_afiliado = procVariables.variables.nombreAfiliado;
+    var cod_cliente = procVariables.variables.cod_cliente;
+    var nit_cliente = procVariables.variables.nit_cliente;
+    var nombre_cliente = procVariables.variables.nombreCliente;
     var procID = taskElement.processInstanceId;
     var URLtaskForm = taskElement.description;
     var estado = taskElement.status;
@@ -365,14 +405,14 @@ function construyeLinea(taskElement, procVariables) {
     $('#tablaTareas').append($('<tr>').append(
                 '<td>' + taskElement.id + '</td>' +
                 '<td>' + taskElement.name + '</td>' +
-                '<td>' + nombre_afiliado + ': ' + cod_afiliacion + '</td>' +
-                '<td>' + dui_cliente + '</td>' +
+                '<td>' + nombre_cliente + ': ' + cod_cliente + '</td>' +
+                '<td>' + nit_cliente + '</td>' +
                 '<td>' + taskElement.priority + '</td>' +
                 '<td>' + (taskElement.status == 'Reserved' || 'Ready' ? 'Pendiente' : 'En Proceso') + '</td>' +
                 '<td>' + formatoFechaISO(taskElement.createdOn) + '</td>'
                     ).attr({
                         'class': 'clickableRow',
-                        'onclick': 'window.location="' + URLtaskForm + '?clientesID=' + cod_afiliacion + '&processid=' + procID + '&taskID=' + taskElement.id + '&estado=' + estado + '"'
+                        'onclick': 'window.location="' + URLtaskForm + '?clientesID=' + cod_cliente + '&processid=' + procID + '&taskID=' + taskElement.id + '&estado=' + estado + '"'
                     })
                 );
 }
