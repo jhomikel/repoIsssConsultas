@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    //cargaCredenciales();
+    cargaCredenciales();
 
     $("#afiliado_num").jStepper();
     $("#btnBuscar").click(function () {

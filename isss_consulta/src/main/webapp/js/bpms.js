@@ -13,35 +13,35 @@ console.log('vars seteadas en bpms.js');
 //window.usuario = 'bpmadmin';
 //window.passwd = 'J$123456'
 
-$.iniciaProcesoEmail = function (processDefinitionID, processDeployment, clienteID, correo) {
-    $.ajax({
-        type: 'POST',
-        xhrFields: {
-            withCredentials: true,
-        },
-        cache: true,
-        dataType: 'json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
-        },
-        url: server + '/business-central/rest/runtime/' + processDeployment + '/process/' + processDefinitionID + '/start',
-        data: {
-            "map_cod_cliente": '"' + clienteID + '"',
-            "map_dir_correo": correo
-        },
-        success: function (data) {
-            console.log('Proceso creado con ID: ' + data.id);
-            //console.log(data.id);
-            //processID = data.id;
-        },
-        error: function () {
-            console.log('Error creando proceso')
-        }
-    })
-}
+//$.iniciaProcesoEmail = function (processDefinitionID, processDeployment, clienteID, correo) {
+//    $.ajax({
+//        type: 'POST',
+//        xhrFields: {
+//            withCredentials: true,
+//        },
+//        cache: true,
+//        dataType: 'json',
+//        beforeSend: function (xhr) {
+//            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
+//        },
+//        url: server + '/business-central/rest/runtime/' + processDeployment + '/process/' + processDefinitionID + '/start',
+//        data: {
+//            "map_cod_cliente": '"' + clienteID + '"',
+//            "map_dir_correo": correo
+//        },
+//        success: function (data) {
+//            console.log('Proceso creado con ID: ' + data.id);
+//            //console.log(data.id);
+//            //processID = data.id;
+//        },
+//        error: function () {
+//            console.log('Error creando proceso')
+//        }
+//    })
+//}
 
 
-var iniciaProceso = function (processDefinitionID, processDeployment) {
+var iniciaProceso = function (processDefinitionID, processDeployment, dataMappings) {
     console.log('usuario a utilizar: ' + window.usuario);
     console.log('password: ' + window.passwd);
     $.ajax({
@@ -55,10 +55,12 @@ var iniciaProceso = function (processDefinitionID, processDeployment) {
             xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
         },
         url: server + '/business-central/rest/runtime/' + processDeployment + '/process/' + processDefinitionID + '/start',
+        data: dataMappings,
         success: function (data) {
             console.log('Proceso iniciado con exito, ID=' + data.id);
             console.log('Obteniendo tarea recien creada...');
-            obtieneTareaPorProceso(data.id, 1);
+            botonSiguiente(data.id);
+            //obtieneTareaPorProceso(data.id, 1);
         },
         error: function () {
             console.log('Error ejecutando metodo iniciaProceso');
@@ -120,46 +122,6 @@ var obtieneTareaPorProceso = function(processID, bandCompletar) {
         },
         error: function () {
             console.log('Error ejecutando metodo obtieneTareaPorProceso');
-            //para pruebas offline de formateo
-            //console.log('pruebas Offline Obtiene Tarea =====');
-            //var json = {
-            //    "status": null,
-            //    "url": null,
-            //    "index": null,
-            //    "commandName": null,
-            //    "taskSummaryList": [
-            //       {
-            //           "@class": "org.kie.services.client.serialization.jaxb.impl.task.JaxbTaskSummary",
-            //           "id": 801,
-            //           "name": "Tarea 1",
-            //           "subject": "",
-            //           "description": "",
-            //           "status": "Reserved",
-            //           "priority": 0,
-            //           "skipable": true,
-            //           "actualOwnerId": "bpmadmin",
-            //           "createdById": "bpmadmin",
-            //           "createdOn": 1463584786190,
-            //           "activationTime": 1463584786190,
-            //           "expirationTime": null,
-            //           "processInstanceId": 26243,
-            //           "processId": "ejemploSubida.demoAPI2",
-            //           "processSessionId": 546,
-            //           "deploymentId": "bpmDemostracion:ejemploSubida:1.0",
-            //           "quickTaskSummary": false,
-            //           "parentId": -1,
-            //           "potentialOwners": null
-            //       }
-            //    ],
-            //    "pageNumber": null,
-            //    "pageSize": null
-            //};
-            //$.each(json.taskSummaryList, function (index, element) {
-            //    if (element.status == 'Reserved') {
-            //        console.log('Iniciando tarea encontrada con ID=' + element.id);
-            //        iniciaTarea(element.id, processID, bandCompletar);
-            //    }
-            //});
         }
     })
 }
