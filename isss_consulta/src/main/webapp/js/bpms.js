@@ -1,8 +1,8 @@
-//DIGICEL
-window.server = 'http://172.26.20.122:8080';
-window.processDeployment = 'bpmDigicel:RenovacionLineas:1.0';
-window.processDefinitionID = 'RenovacionLineas.Digicel_Renovacion';
-window.usuario = 'mmayen';
+    //DIGICEL
+window.server = 'http://192.168.56.102:8080';
+window.processDeployment = 'UnidadISSS:ConsultaPrj:1.0';
+window.processDefinitionID = 'ConsultaPrj.ProcessConsulta';
+//window.usuario = 'mmayen';
 window.passwd = 'J$123456'
 console.log('vars seteadas en bpms.js');
 
@@ -56,36 +56,22 @@ var iniciaProceso = function (processDefinitionID, processDeployment) {
         },
         url: server + '/business-central/rest/runtime/' + processDeployment + '/process/' + processDefinitionID + '/start',
         success: function (data) {
-            //console.log(data);
             console.log('Proceso iniciado con exito, ID=' + data.id);
-            //processID = data.id;
-            //guardo las variables processID y clientID en localStorage (validar que no se pueda usar este boton (btnTerminar) si no ha cargado un clientID)
-            //var bpms = {
-            //    codCliente: $('#clientes_clienteId').val(),
-            //    processID: data.id
-            //};
-            ////lo convierto a JSON
-            //bpms = JSON.stringify(bpms);
-            ////por si lo quiero encriptar
-            ////bpms = btoa(bpms);
-            ////lo guardo en el localStorage
-            //localStorage.setItem('bpmsls', bpms);
-            //console.log('funcion guardar en localStorage completada');
-            //console.log(bpms);
             console.log('Obteniendo tarea recien creada...');
             obtieneTareaPorProceso(data.id, 1);
         },
         error: function () {
+            console.log('Error ejecutando metodo iniciaProceso');
             //para pruebas offline
-            console.log('pruebas offline: Inicia Proceso =====')
-            var json = {
-                "process-id": "ejemploSubida.demoAPI2",
-                "id": "26244",
-                "state": "1",
-                "parentProcessInstanceId": "0",
-                "status": "SUCCESS",
-                "url": "/business-central/rest/runtime/bpmDemostracion:ejemploSubida:1.0/process/ejemploSubida.demoAPI2/start"
-            };
+            //console.log('pruebas offline: Inicia Proceso =====')
+            //var json = {
+            //    "process-id": "ejemploSubida.demoAPI2",
+            //    "id": "26244",
+            //    "state": "1",
+            //    "parentProcessInstanceId": "0",
+            //    "status": "SUCCESS",
+            //    "url": "/business-central/rest/runtime/bpmDemostracion:ejemploSubida:1.0/process/ejemploSubida.demoAPI2/start"
+            //};
             //console.log(json);
             //console.log(json.id);
             //var bpms = {
@@ -100,10 +86,6 @@ var iniciaProceso = function (processDefinitionID, processDeployment) {
             //localStorage.setItem('bpmsls', bpms);
             //console.log('funcion guardar en localStorage completada');
             //console.log(bpms);
-
-            console.log('Obteniendo tarea recien creada...');
-            obtieneTareaPorProceso(json.id, 1);
-
         }
     })
 }
@@ -130,49 +112,54 @@ var obtieneTareaPorProceso = function(processID, bandCompletar) {
                     console.log('Iniciando tarea encontrada con ID=' + element.id);
                     iniciaTarea(element.id, processID, bandCompletar);
                 }
+                if (element.status == 'InProgress') {
+                    console.log('Tarea con ID ' + element.id + ' encontrada en proceso, variable seteada');
+                    taskID = element.id;
+                }
             });
         },
         error: function () {
+            console.log('Error ejecutando metodo obtieneTareaPorProceso');
             //para pruebas offline de formateo
-            console.log('pruebas Offline Obtiene Tarea =====');
-            var json = {
-                "status": null,
-                "url": null,
-                "index": null,
-                "commandName": null,
-                "taskSummaryList": [
-                   {
-                       "@class": "org.kie.services.client.serialization.jaxb.impl.task.JaxbTaskSummary",
-                       "id": 801,
-                       "name": "Tarea 1",
-                       "subject": "",
-                       "description": "",
-                       "status": "Reserved",
-                       "priority": 0,
-                       "skipable": true,
-                       "actualOwnerId": "bpmadmin",
-                       "createdById": "bpmadmin",
-                       "createdOn": 1463584786190,
-                       "activationTime": 1463584786190,
-                       "expirationTime": null,
-                       "processInstanceId": 26243,
-                       "processId": "ejemploSubida.demoAPI2",
-                       "processSessionId": 546,
-                       "deploymentId": "bpmDemostracion:ejemploSubida:1.0",
-                       "quickTaskSummary": false,
-                       "parentId": -1,
-                       "potentialOwners": null
-                   }
-                ],
-                "pageNumber": null,
-                "pageSize": null
-            };
-            $.each(json.taskSummaryList, function (index, element) {
-                if (element.status == 'Reserved') {
-                    console.log('Iniciando tarea encontrada con ID=' + element.id);
-                    iniciaTarea(element.id, processID, bandCompletar);
-                }
-            });
+            //console.log('pruebas Offline Obtiene Tarea =====');
+            //var json = {
+            //    "status": null,
+            //    "url": null,
+            //    "index": null,
+            //    "commandName": null,
+            //    "taskSummaryList": [
+            //       {
+            //           "@class": "org.kie.services.client.serialization.jaxb.impl.task.JaxbTaskSummary",
+            //           "id": 801,
+            //           "name": "Tarea 1",
+            //           "subject": "",
+            //           "description": "",
+            //           "status": "Reserved",
+            //           "priority": 0,
+            //           "skipable": true,
+            //           "actualOwnerId": "bpmadmin",
+            //           "createdById": "bpmadmin",
+            //           "createdOn": 1463584786190,
+            //           "activationTime": 1463584786190,
+            //           "expirationTime": null,
+            //           "processInstanceId": 26243,
+            //           "processId": "ejemploSubida.demoAPI2",
+            //           "processSessionId": 546,
+            //           "deploymentId": "bpmDemostracion:ejemploSubida:1.0",
+            //           "quickTaskSummary": false,
+            //           "parentId": -1,
+            //           "potentialOwners": null
+            //       }
+            //    ],
+            //    "pageNumber": null,
+            //    "pageSize": null
+            //};
+            //$.each(json.taskSummaryList, function (index, element) {
+            //    if (element.status == 'Reserved') {
+            //        console.log('Iniciando tarea encontrada con ID=' + element.id);
+            //        iniciaTarea(element.id, processID, bandCompletar);
+            //    }
+            //});
         }
     })
 }
@@ -200,30 +187,15 @@ var iniciaTarea = function(tareaID, processID, bandCompletar) {//if bandCompleta
             if (bandCompletar == 1) {
                 console.log('completando tarea recien iniciada...');
                 var parametros = {
-                    "map_cod_cliente": '"' + $('#clientes_clienteId').val() + '"'
+                    "map_cod_cliente": '"' + $('#clientes_clienteId').val() + '"',
+                    "map_nit_cliente": '"' + $('#clientes_nithidden').val() + '"',
+                    "map_nombreCliente": '"' + $('#clientes_nombrehidden').val() + '"'
                 };
                 completaTarea(tareaID, processID, parametros, bandCompletar);
             }
         },
         error: function () {
-            //para pruebas offline de formateo
-            console.log('pruebas Offline Inicia Tarea =====');
-            var json = {
-                "status": "SUCCESS",
-                "url": "/business-central/rest/task/841/start"
-            };
-            console.log(json);
-            if (json.status == 'SUCCESS') {
-                console.log('Tarea con ID ' + tareaID + ' iniciada');
-                taskID = tareaID;
-            }
-            if (bandCompletar == 1) {
-                console.log('completando tarea recien iniciada...');
-                parametros = {
-                    "map_cod_cliente": '"' + $('#clientes_clienteId').val() + '"'
-                };
-                completaTarea(tareaID, processID, parametros, bandCompletar);
-            }
+            console.log('Error ejecutando metodo iniciaTarea');
         }
     })
 }
@@ -254,21 +226,7 @@ var completaTarea = function(taskID, processID, dataMappings, bandCompletar) {
             //$.siguientePaso(processID, $("#paso_siguiente").val(), $('#clientes_clienteId').val());
         },
         error: function () {
-            //para pruebas offline de formateo
-            console.log('pruebas Offline Completar Tarea =====');
-            var json = {
-                "status": "SUCCESS",
-                "url": "/business-central/rest/task/842/complete",
-                "message": null
-            };
-            //console.log(json);
-            if (json.status == 'SUCCESS') {
-                console.log('Tarea con ID ' + taskID + ' completada');
-            }
-            //$.siguientePaso(processID, $("#paso_siguiente").val(), $('#clientes_clienteId').val());
-            if (bandCompletar == 1) {
-                botonSiguiente(processID);
-            }
+            console.log('Error ejecutando metodo completaTarea');
         }
     })
 }
@@ -434,19 +392,24 @@ function obtieneTareas(potentialOwner, estado) {
 //taskElement es el json completo de la tarea, procVariables son todas las variables del proceso al cual pertenece esa tarea
 function construyeLinea(taskElement, procVariables) {
     var cod_cliente = procVariables.variables.cod_cliente;
+    var nit_cliente = procVariables.variables.nit_cliente;
+    var nombre_cliente = procVariables.variables.nombreCliente;
     var procID = taskElement.processInstanceId;
     var URLtaskForm = taskElement.description;
     var estado = taskElement.status;
     console.log('URL: ' + taskElement.description);
     console.log('processID: ' + procID);
     console.log('cod_cliente: ' + cod_cliente);
+    console.log('nit_cliente: ' + nit_cliente);
+    console.log('nombreCliente: ' + nombre_cliente);
     $('#tablaTareas').append($('<tr>').append(
                 '<td>' + taskElement.id + '</td>' +
                 '<td>' + taskElement.name + '</td>' +
-                '<td>' + 'ID de Cliente: ' + cod_cliente + '</td>' +
+                '<td>' + nombre_cliente + ': ' + cod_cliente + '</td>' +
+                '<td>' + nit_cliente + '</td>' +
                 '<td>' + taskElement.priority + '</td>' +
                 '<td>' + (taskElement.status == 'Reserved' || 'Ready' ? 'Pendiente' : 'En Proceso') + '</td>' +
-                '<td>' + new Date(taskElement.createdOn) + '</td>'
+                '<td>' + formatoFechaISO(taskElement.createdOn) + '</td>'
                     ).attr({
                         'class': 'clickableRow',
                         'onclick': 'window.location="' + URLtaskForm + '?clientesID=' + cod_cliente + '&processid=' + procID + '&taskID=' + taskElement.id + '&estado=' + estado + '"'
@@ -471,29 +434,7 @@ function obtieneVariablesProceso(taskElement) {
             //$('#resultado').html(JSON.stringify(data));
         },
         error: function () {
-            //para pruebas offline de formateo
-            console.log('pruebas offline obtiene Variables ==');
-            var json = {
-                "status": "SUCCESS",
-                "url": "/business-central/rest/runtime/bpmDemostracion:ejemploSubida:1.0/withvars/process/instance/26308",
-                "variables": [
-                   {
-                       "key": "cod_cliente",
-                       "value": "123456"
-                   },
-                   {
-                       "key": "initiator",
-                       "value": "bpmadmin"
-                   }
-                ],
-                "processInstance": {
-                    "process-id": "ejemploSubida.demoAPI2",
-                    "id": "26308",
-                    "state": "1",
-                    "parentProcessInstanceId": "0"
-                }
-            };
-            construyeLinea(taskElement, json);
+            console.log('Error ejecutando metodo obtieneVariablesProceso');
         }
     })
 }
@@ -530,6 +471,82 @@ function obtieneVariablePaso4() {//le mando el deployment id que es x:x:x y el p
     })
 }
 
+function obtieneDetallesInstanciaProceso(processInstanceID) {
+    $.ajax({
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true,
+        },
+        cache: true,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
+        },
+        url: server + '/business-central/rest/history/instance/' + processInstanceID,
+        success: function (data) {
+            //tengo que setear el reloj saco la diferencia entre la fecha obtenida y ahora
+            console.log(data.start);
+            var fechaIni = new Date(data.start);
+            var fechaPresente = new Date();
+            console.log('Fecha inicial: ' + fechaIni);
+            console.log('Fecha ahora: ' + fechaPresente);
+            var diff = fechaIni - fechaPresente;
+            console.log(diff);
+            var date = new Date().addSeconds(diff / 1000) / 1000;
+
+            $('.timer').countid({
+                clock: true,
+                dateTime: date,
+                dateTplRemaining: "%H:%M:%S",
+                dateTplElapsed: "%H:%M:%S",
+                complete: function (el) {
+                    el.animate({ 'font-size': '18px' });
+                }
+            });
+        },
+        error: function () {
+            //para pruebas offline de formateo
+            console.log('pruebas offline obtiene Variables ==');
+            var json = {
+                "process-instance-id": "26123",
+                "process-id": "RenovacionLineas.Digicel_Renovacion",
+                "start": "2016-06-07T10:34:02.897-06:00",
+                "status": "1",
+                "parent-process-instance-id": "-1",
+                "outcome": {
+                    "@nil": "true"
+                },
+                "identity": "mmayen",
+                "process-version": "1.0",
+                "process-name": "Digicel_Renovacion",
+                "external-id": "bpmDigicel:RenovacionLineas:1.0",
+                "process-instance-description": "Digicel_Renovacion"
+            };
+            
+            //tengo que setear el reloj saco la diferencia entre la fecha obtenida y ahora
+            console.log(json.start);
+            var fechaIni = new Date(json.start);
+            var fechaPresente = new Date();
+            console.log('Fecha inicial: ' + fechaIni);
+            console.log('Fecha ahora: ' + fechaPresente);
+            var diff = fechaIni - fechaPresente;
+            console.log(diff);
+            var date = new Date().addSeconds(diff/1000) / 1000;
+
+            $('.timer').countid({
+                clock: true,
+                dateTime: date,
+                dateTplRemaining: "%H:%M:%S",
+                dateTplElapsed: "%H:%M:%S",
+                complete: function (el) {
+                    el.animate({ 'font-size': '18px' });
+                }
+            });
+
+        }
+    })
+}
+
 function obtieneVariablesIngresoEgreso() {//le mando el deployment id que es x:x:x y el processid (esto ya esta en la URL y lo seteo en cargapaginainiciatarea)
     $.ajax({
         type: 'GET',
@@ -547,44 +564,103 @@ function obtieneVariablesIngresoEgreso() {//le mando el deployment id que es x:x
             console.log(data);
             //console.log(data.variables.autorizarLC);
             if (data.variables.salario !== undefined) {
-                htmlinterno += '<br id="txtSalario">Salario: <b>0.00</b>';
+                htmlinterno += '<br id="txtSalario">Salario: <b>' + data.variables.salario + '</b>';
             }
             if (data.variables.comisiones !== undefined) {
-                htmlinterno += '<br id="txtComision">Comisiones: <b>0.00</b>';
+                htmlinterno += '<br id="txtComision">Comisiones: <b>' + data.variables.comisiones + '</b>';
             }
             if (data.variables.ingreso_remesas !== undefined) {
-                htmlinterno += '<br id="txtRemesas">Remesas: <b>0.00</b>';
+                htmlinterno += '<br id="txtRemesas">Remesas: <b>' + data.variables.ingreso_remesas + '</b>';
             }
             if (data.variables.horas_extra !== undefined) {
-                htmlinterno += '<br id="txtHorasExtra">Horas extra: <b>0.00</b>';
+                htmlinterno += '<br id="txtHorasExtra">Horas extra: <b>' + data.variables.horas_extra + '</b>';
             }
             if (data.variables.intereses_alquileres !== undefined) {
-                htmlinterno += '<br id="txtInteres">Intereses: <b>0.00</b>';
+                htmlinterno += '<br id="txtInteres">Intereses: <b>' + data.variables.intereses_alquileres + '</b>';
             }
             if (data.variables.dividendos !== undefined) {
-                htmlinterno += '<br id="txtDividendos">Dividendos: <b>0.00</b>';
+                htmlinterno += '<br id="txtDividendos">Dividendos: <b>' + data.variables.dividendos + '</b>';
             }
             if (data.variables.otros !== undefined) {
-                htmlinterno += '<br id="txtOtrosIng">Otros: <b>0.00</b>';
+                htmlinterno += '<br id="txtOtrosIng">Otros: <b>' + data.variables.otros + '</b>';
             }
-            $('#ingresostd').html = htmlinterno;
+            console.log(htmlinterno);
+            $('#ingresostd').html(htmlinterno);
             //FIN INGRESOS
             var htmlinternoegresos = '';
             if (data.variables.gastos_vida !== undefined) {
-                htmlinternoegresos += '<br id="txtVida">Gastos de vida: <b>0.00</b>';
+                htmlinternoegresos += '<br id="txtVida">Gastos de vida: <b>' + data.variables.gastos_vida + '</b>';
             }
             if (data.variables.descuentos_ley !== undefined) {
-                htmlinternoegresos += '<br id="txtLey">Descuentos de ley: <b>0.00</b>';
+                htmlinternoegresos += '<br id="txtLey">Descuentos de ley: <b>' + data.variables.descuentos_ley + '</b>';
             }
             if (data.variables.otros_egresos !== undefined) {
-                htmlinternoegresos += '<br id="txtOtrosEg">Otros: <b>0.00</b>';
+                htmlinternoegresos += '<br id="txtOtrosEg">Otros: <b>' + data.variables.otros_egresos + '</b>';
             }
-            $('#egresostd').html = htmlinternoegresos;
+            console.log(htmlinternoegresos);
+            $('#egresostd').html(htmlinternoegresos);
+            //INCREMENTO LC
+            if (data.variables.incrementoLC !== undefined) {
+                $('#incrementoLC').html(data.variables.incrementoLC);
+            }
+           
             
         },
         error: function () {
             //para pruebas offline de formateo
             console.log('Error llamando a metodo');
+        }
+    })
+}
+
+
+function obtieneTareasIndex() {
+    $.ajax({
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true,
+        },
+        cache: true,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
+        },
+        url: server + '/business-central/rest/task/query',
+        //data: {
+        //    "potentialOwner": potentialOwner
+        //},
+        success: function (data) {
+            var countCompletadas = 0;
+            var countEnProceso = 0;
+            var countPendientes = 0;
+            //$('#resultado').html(JSON.stringify(data));
+            $.each(data.taskSummaryList, function (index, element) {
+                if (element.status == 'Reserved' || element.status == 'Ready') {
+                    countPendientes++;
+                }
+                if (element.status == 'InProgress') {
+                    countEnProceso++;
+                }
+                if (element.status == 'Completed') {
+                    countCompletadas++;
+                }
+            });
+            //seteo los valores en el DOM
+            console.log('pendientes, proceso, completadas=' + countPendientes + ',' + countEnProceso + ',' + countCompletadas);
+            $('#countCompletadas').text(countCompletadas);
+            $('#countEnProceso').text(countEnProceso);
+            $('#countPendientes').text(countPendientes);
+        },
+        error: function () {
+            //para pruebas offline de formateo
+            console.log('Error ejecutando metodo obtieneTareasIndex');
+            var countCompletadas = 25;
+            var countEnProceso = 14;
+            var countPendientes = 9;
+            console.log('pendientes, proceso, completadas=' + countPendientes + ',' + countEnProceso + ',' + countCompletadas);
+            $('#countCompletadas').text(countCompletadas);
+            $('#countEnProceso').text(countEnProceso);
+            $('#countPendientes').text(countPendientes);
         }
     })
 }
