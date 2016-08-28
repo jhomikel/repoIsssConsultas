@@ -82,27 +82,6 @@ var nombreClienteActivo = function (primerNombreCliente, primerApellidoCliente) 
 
 //================================================================  FIN NOMBRE CLIENTUE
 
-$.wsOferta = function (processid, incrementoLC) {
-    $.ajax({
-        type: 'GET',
-        cache: true,
-        dataType: 'json',
-        url: 'http://172.26.20.122:8080/DigicelBusinessCentral_Services/webresources/detalle_ofertas/getLimiteCredito',
-        data: {
-            'processid': idCliente,
-            'incrementoLC': incrementoLC
-        },
-        success: function (data) {
-            console.log('ejecutado con exito');
-        },
-        error: function () {
-            //para pruebas offline de formateo
-            console.log('');
-            var json = '1';
-        }
-    })
-}
-
 // MOSTRAR DATOS CLIENTE
 
 //Funcion que ejecuto en la carga de cada pagina, setea las variables globales y decide como iniciar la tarea
@@ -289,34 +268,6 @@ var botonSiguientePaso8 = function (aprobado) {
     }
 }
 
-
-//$.botonSiguienteTemp = function () {
-//    var codigoCliente = $.urlParam("clientesID");
-//    var processid = $.urlParam("processid");
-//    var pasoSiguiente = $("#paso_siguiente").val();
-//    //var nombreCliente = $("#nombre_cliente").html();
-//    //var apellidoCliente = $("#apellido_cliente").html();
-//    window.location = pasoSiguiente + "?processid=" + processid + "&clientesID=" + codigoCliente;
-//};
-
-
-//$.botonSiguiente = function(){
-//    var codigoCliente = $.urlParam("clientesID");
-//    var proccessid = $.urlParam("proccessid");
-//    var pasoSiguiente = $("#paso_siguiente").val();
-//    var nombreCliente = $("#nombre_cliente").html();
-//    var apellidoCliente = $("#apellido_cliente").html();
-//    window.location = pasoSiguiente +"?proccessid=" + proccessid + "&clientesID=" + codigoCliente + "&primerNombre=" + nombreCliente + "&apellido=" + apellidoCliente;
-//};
-
-
-//$.siguientePaso = function (processIDparam, pasoSiguiente, codigoCliente, nombreCliente, apellidoCliente) {
-//    window.location = pasoSiguiente + "?processid=" + processIDparam + "&clientesID=" + codigoCliente + "&primerNombre=" + nombreCliente + "&apellido=" + apellidoCliente;
-//};
-
-//$.siguientePaso = function (processIDparam, pasoSiguiente, codigoCliente) {
-//    window.location = pasoSiguiente + "?processid=" + processIDparam + "&clientesID=" + codigoCliente;
-//};
 
 $.botonTerminar = function(){
     var r = confirm("Esta seguro que desea salir?");
