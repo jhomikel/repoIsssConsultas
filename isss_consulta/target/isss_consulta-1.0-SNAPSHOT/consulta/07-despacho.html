@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="../css/main.css">
-  <link rel="canonical" href="../renovaciones/02-detalle-cuenta.html">
+  <link rel="canonical" href="../renovaciones/04-oferta.html">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
 </head>
 
@@ -43,7 +43,7 @@
 	<img src="../images/logo-s.png"/>
 	<a id="dash-bt1" class="dash-bt hidden-xs" href="../index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
 	<a id="dash-bt-ayuda" class="dash-bt hidden-xs" href=""><span class="glyphicon glyphicon-alert"></span> Ayuda</a>
-        <a id="dash-bt-salir" class="dash-bt hidden-xs" href="http://192.168.56.102:8080/isss_consulta/SvlAbandonar"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+        <a id="dash-bt-salir" class="dash-bt hidden-xs" href="http://172.26.20.122:8080/digicel-renovacion/SvlAbandonar"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
 	<a id="dash-bt-user" class="dash-bt hidden-xs" href=""><span class="glyphicon glyphicon-user"></span> mmayen </a>
 </div>
 
@@ -53,7 +53,7 @@
 			<div class="col-md-12 main">
 				<div class="row">
 					<div class="col-md-9">
-							<h1>CONSULTA EXTERNA - ISSS</h1>
+							<h1>Renovaciones contratos pospago</h1>
 					</div>
 
 					<div class="col-md-3 ">
@@ -71,60 +71,40 @@
 			<div class="row">
 				<div class="col-md-12 main">
 					<div class="main-contents">
-<input type="hidden" id="numafiliacion" name="numafiliacion" value=""/>
+						<input type="hidden" id="clientes_clienteId" name="clientes_clienteId" value=""/>
 <input type="hidden" id="proccessid" name="proccessid" value=""/>
+<input type="hidden" id="tipo_cliente" name="tipo_cliente" value=""/>
+<input type="hidden" id="terminar" name="terminar" value="/tareas/tareas-pendientes.html"/>
+<input type="hidden" id="direccion_url" value="http://172.26.20.162/CalcularSubsidio/OfertaComercial/wfOfertaComercialRedHat.aspx"/>
 
-<input type="hidden" name="paso_siguiente" id="paso_siguiente" value="03-solicitud-renovacion.html">
+<input type="hidden" name="paso_siguiente" id="paso_siguiente" value="09-registrar-emeis.html">
 
 
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="info-pasos">
-                                    <h3>Paso <span class="numero-paso activo">2</span> de 7 : Recepción de citas</h3>
+                                    <h3>Paso <span class="numero-paso activo">5</span> de 12 : Oferta de renovación</h3>
                                 </div>
                             </div>
                         </div>
 
 
-
-
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
-		<div class="detalle-cliente">Consulta externa para el afiliado: <span id="nombre_afiliado"></span>&nbsp;<span id="apellido_afiliado"></span></div>
+		<div class="detalle-cliente">Renovación para cliente: <span id="nombre_cliente"></span>&nbsp;<span id="apellido_cliente"></span></div>
 	</div>
 </div>
 
 
 
 <div class="row">
-	<div class="col-md-10 col-md-offset-1">
 	<div class="formulario">
-            
-            <div id="MostrarFecha">             
-            </div>
-            <br><br>
-            <div id="citas"></div> 
-	</div>
-	</div>
-</div>
+		<iframe allowfullscreen="" frameborder="0" id="myIframe" src=""></iframe>
 
-<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-	<form action="">
-		<div class="form-group">
-		Es necesaria la revisión de signos vitales
-			<div class="radio">
-				<label for="tipo1"><input type="radio" name="tipo" id="tipo1" value="SISignosVitales" /> SI es necesario</label>
-			</div>
-			<div class="radio">
-				<label for="tipo2">
-					<input type="radio" name="tipo" id="tipo2" value="NOSignosVitales" /> NO es necesario
-				</label>
-			</div>
-		</div>
-	</form>
+	</div>
+    <!--<input type="text" id="incrementoLC" name="incrementoLC" />-->
 </div>
-
+                        
 <div class="row">
 	<div class="botones-proceso">
 		<div class="col-md-3 col-md-offset-1">
@@ -167,8 +147,7 @@
 <script src="../js/funciones.js"></script>
 <script src="../js/renovaciones/bpms.js"></script>
 
-
-<script src="../js/renovaciones/02-recepcion.js" type="text/javascript"></script>
+<script src="../js/renovaciones/04-oferta.js" type="text/javascript"></script>
 
 
 
