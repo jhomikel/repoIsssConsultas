@@ -1,47 +1,84 @@
 $(document).ready(function () {
 
+    // Cargar credenciales
     //cargaCredenciales();
+    //cargaPaginaIniciaTarea();
+    //obtieneNombreCliente(codigoAfiliado);
+    //obtieneDetallesInstanciaProceso($.urlParam('processid'));
 
-    $("#afiliado_num").jStepper();
-    $("#btnBuscar").click(function () {
-        var afiliadonum = $("#afiliado_num").val();
-        var jsonUrl = "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/afiliado/";
-        if (afiliadonum.length > 0) {
-            $.getJSON(jsonUrl + afiliadonum,
-                    mostrarDatosAfiliado);
-        }
-    });
+    var processid = $.urlParam('processid');
+    var codigoAfiliado = $.urlParam('afiliadoID');
+    var varsFrecuentes = "?processid=" + processid + "&afiliadoID=" + codigoAfiliado;
+    
+    var fecha = new Date();
+    var fechaSttr = '<h2>Cita programada: ' + fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear() + '</h2>';
+    document.getElementById('MostrarFecha').innerHTML = fechaSttr;
 
-    function mostrarDatosAfiliado(datos) {
-        html = '<div class="table-responsive"><table class="table table-striped">';
-        html += '<caption class="encabezado">DATOS ENCONTRADOS</caption>';
-        html += '<tbody><tr><td>Numero de afiliaci&oacute;n:</td><td id="cliente_numeroAfiliacion">' + datos[0].numafiliacion.numafiliacion + '</td></tr>';
-        html += '<tr><td>Nombres:</td><td>' + datos[0].numafiliacion.nombres + '</td></tr>';
-        html += '<tr><td>Apellidos:</td><td>' + datos[0].numafiliacion.apellidos + '</td></tr>';
-        html += '<tr><td id="cliente_DUI">DUI:</td><td>' + datos[0].numafiliacion.dui + '</td></tr>';
-        html += '<tr><td>Sexo:</td><td>' + datos[0].numafiliacion.sexo + '</td></tr>';
-        html += '<tr><td>Ocupaci&oacute;n:</td><td>' + datos[0].numafiliacion.ocupacion + '</td></tr>';
-        html += '<tr><td>Departamento:</td><td>' + datos[0].numafiliacion.departamento + '</td></tr>';
-        html += '<tr><td>Municipio:</td><td>' + datos[0].numafiliacion.municipio + '</td></tr>';
-        html += '<tr><td>Direcci&oacute;n:</td><td>' + datos[0].numafiliacion.direccion + '</td></tr>';
-        html += '<tr><td colspan=2 align=center>CITAS PENDIENTES</td></tr>';
+    $.getJSON("http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/fechacita",
+	{   
+            numafiliacion: codigoAfiliado,
+            fechacita: fecha.getFullYear() + '-' + (fecha.getMonth() +1) + '-' + fecha.getDate()
+        },
+	mostrarDatosCita);
+
+    function mostrarDatosCita(datos) {
+        html = '<div class="table-responsive"><table class="tablasJSON table table-striped">';
+        html += '<caption class=encabezado><h4>CITA</h4></caption>';
+        html += '<tr><th>ITEM</th>';
+        html += '<th>DESCRIPCION</th></tr>';
         $.each(datos, function (i, value) {
-            html += '<tr><td>Cita ' + datos[i].codcita + '</td>';
-            html += '<td>' + datos[i].fechacita + ' - ' + datos[i].horacita + '</td>';
-            html += '</tr>';
+            html += '<tr><td>Tipo de cita</td><td>' + datos[i].tipo + '</td></tr>';
+            html += '<tr><td>Fecha de la solicitud</td><td>' + datos[i].fechasolicitud + '</td></tr>';
+            html += '<tr><td>Fecha de la cita</td><td>' + datos[i].fechacita + '</td></tr>';
+            html += '<tr><td>Hora de la cita</td><td>' + datos[i].horacita + '</td></tr>';
+            html += '<tr><td>Clinica de la cita</td><td>' + datos[i].clinica + '</td></tr>';
+            html += '<tr><td>Especialidad</td><td>' + datos[i].codmedico.codespecialidad.nombespecialidad + '</td></tr>';
+            html += '<tr><td>Nombre del medico</td><td>' + datos[i].codmedico.nombres + '</td></tr>';
+            html += '<tr><td>Apellido del medico</td><td>' + datos[i].codmedico.apellidos + '</td></tr>';
+            html += '</table>';
         });
-        html += '</tbody></table></div>';
-        $("#resultado").html(html);
-        $('#clientes_numeroAfiliacion').val(datos[0].numafiliacion.numafiliacion);
-        $('#clientes_DUI').val(datos[0].numafiliacion.dui);
-        $('#clientes_nombreAfiliado').val(datos[0].numafiliacion.nombres + ' ' + datos[0].numafiliacion.apellidos);
+        html += '</div>';
+        document.getElementById('citas').innerHTML = html;
+
     };
 
-    $("#btnSiguiente").click(botonSiguientePaso1);
+
+    $("#btnSiguiente").click(function iniciarCita(){
+        //botonSiguiente;
+        //Recuperar el número del proceso
+        
+        var processid = 25953;
+        
+        var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.atencion",
+                "method": "POST",
+                "headers": {
+                  "content-type": "application/json",
+                  "cache-control": "no-cache",
+                  "postman-token": "3075258f-be72-fd00-b378-06db8d7bbe0c"
+                },
+                "processData": false,
+                "data": "{\n\
+                            \"codatencion\":" + processid + ",\n\
+                            \"fechaatencion\":" + fecha.getTime() + ",\n\
+                            \"tipohoja\":\"HOJA SUBSECUENTE\",\n\
+                            \"codcita\":{\n\
+                                \"codcita\":" + codigoCita + "\n\
+                                    }\n\
+                        }"
+          }
+
+          $.ajax(settings).done(function (response) {
+            alert('Cita ingresada satisfactoriamente');
+          });
+    });
     $("#btnTerminar").click(function () {
         var r = confirm("Esta seguro que desea salir?");
         if (r === true) {
             window.location = "../tareas/tareas-pendientes.html";
         }
     });
+
 });

@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
+    // Cargar credenciales
     //cargaCredenciales();
     //cargaPaginaIniciaTarea();
     //obtieneNombreCliente(codigoAfiliado);
     //obtieneDetallesInstanciaProceso($.urlParam('processid'));
-   
+
+    var processid = $.urlParam('processid');
     var codigoAfiliado = $.urlParam('afiliadoID');
     var varsFrecuentes = "?processid=" + processid + "&afiliadoID=" + codigoAfiliado;
-    var codigoCita = 0;
-    var fecha = new Date();
     
     var fecha = new Date();
     var fechaSttr = '<h2>Cita programada: ' + fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear() + '</h2>';
@@ -27,7 +27,6 @@ $(document).ready(function () {
         html += '<tr><th>ITEM</th>';
         html += '<th>DESCRIPCION</th></tr>';
         $.each(datos, function (i, value) {
-            codigoCita = datos[i].codcita;
             html += '<tr><td>Tipo de cita</td><td>' + datos[i].tipo + '</td></tr>';
             html += '<tr><td>Fecha de la solicitud</td><td>' + datos[i].fechasolicitud + '</td></tr>';
             html += '<tr><td>Fecha de la cita</td><td>' + datos[i].fechacita + '</td></tr>';
@@ -45,7 +44,6 @@ $(document).ready(function () {
 
 
     $("#btnSiguiente").click(function iniciarCita(){
-        
         //botonSiguiente;
         //Recuperar el número del proceso
         
