@@ -43,7 +43,33 @@ $(document).ready(function () {
 
 
     $("#btnSiguiente").click(function iniciarCita(){
-        
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/1",
+            "method": "PUT",
+            "headers": {
+              "content-type": "application/json",
+              "cache-control": "no-cache",
+              "postman-token": "99091d56-fbcc-77b2-6cdb-cf3364b543b0"
+            },
+            "processData": false,
+            "data": "{\n\
+                        \"codcita\":1,\n\
+                        \"tipo\": \"ASEGURADO\",\n\
+                        \"fechasolicitud\": 1464825600000,\n\
+                        \"fechacita\": 1472342400000,\n\
+                        \"horacita\": 50400000,\n\
+                        \"clinica\": 1,\n\
+                        \"processid\": 25953,\n\
+                        \"numafiliacion\": 123456789,\n\
+                        \"codmedico\": 123456\n\
+                    }"
+          }
+
+          $.ajax(settings).done(function (response) {
+            alert('Cita ingresada satisfactoriamente');
+          });
         //botonSiguiente;
     });
     $("#btnTerminar").click(function () {
