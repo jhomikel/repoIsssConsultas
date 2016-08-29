@@ -89,7 +89,7 @@ $(document).ready(function () {
                     $("#paso_siguiente").val('04-historial.html');
                 }
                 console.log(parametros);
-                alert('stop');
+                //alert('stop');
                 botonSiguiente($.urlParam('processid'), parametros);
             });
         }
