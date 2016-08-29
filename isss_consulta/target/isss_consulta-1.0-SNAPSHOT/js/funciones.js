@@ -45,32 +45,29 @@ var obtieneNombreCliente = function (idCliente) {
         type: 'GET',
         cache: true,
         dataType: 'json',
-        url: 'http://172.26.20.122:8080/DigicelSPP_Services/webresources/BuscarCliente/getNombres',
-        data: {
-            'clientesId': idCliente
-        },
+        url: 'http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.afiliado/' + idCliente,
         success: function (data) {
-            console.log(data.primernombre);
-            console.log(data.primerapellidorazonsoc);
-            nombreClienteActivo(data.primernombre, data.primerapellidorazonsoc);
+            console.log(data.nombres);
+            console.log(data.apellidos);
+            nombreClienteActivo(data.nombres, data.apellidos);
         },
         error: function () {
             //para pruebas offline de formateo
             console.log('pruebas Offline Obtiene Nombre Cliente =====');
             var json = {
-                "clientesId": "71741",
-                "primernombre": "LUIS",
-                "segundonombre": null,
-                "tercernombre": null,
-                "primerapellidorazonsoc": "PRUEBAS DIGICELGROUP SA DE CV",
-                "segundoApellido": null,
-                "profesion": null,
-                "limitecredito": 0,
-                "nit": null
+                "numafiliacion": 840285147,
+                "nombres": "ROGER ERNESTO",
+                "apellidos": "ESCOBAR RAMIREZ",
+                "dui": "678925419",
+                "sexo": "M",
+                "ocupacion": "TECNICO EN SISTEMAS",
+                "departamento": "SAN SALVADOR",
+                "municipio": "SOYAPANGO",
+                "direccion": "CASA #15 COL. SAN JOSE"
             };
-            console.log(json.primernombre);
-            console.log(json.primerapellidorazonsoc);
-            nombreClienteActivo(json.primernombre, json.primerapellidorazonsoc);
+            console.log(data.nombres);
+            console.log(data.apellidos);
+            nombreClienteActivo('PRUEBAS ', 'OFFLINE');
         }
     })
 }
@@ -146,7 +143,7 @@ var botonSiguiente = function (processIDparam, dataArray) {
     if (!$("#clientes_numeroAfiliacion").val()) {//paso 2 en adelante
         var codigoCliente = $.urlParam("clientesID");
         //finalizo la tarea, taskID la seteo en la funcion iniciaTarea al cargar cada pagina.
-        completaTarea(taskID, processid, dataArray);
+        completaTarea(taskID, processid, dataArray, 0);
         //alert('Boton Siguiente paso N, codigoCliente=' + codigoCliente);
 
         window.location = pasoSiguiente + "?processid=" + processid + "&clientesID=" + codigoCliente;
