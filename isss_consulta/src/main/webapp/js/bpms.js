@@ -13,32 +13,32 @@ console.log('vars seteadas en bpms.js');
 //window.usuario = 'bpmadmin';
 //window.passwd = 'J$123456'
 
-$.iniciaProcesoEmail = function (processDefinitionID, processDeployment, clienteID, correo) {
-    $.ajax({
-        type: 'POST',
-        xhrFields: {
-            withCredentials: true,
-        },
-        cache: true,
-        dataType: 'json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
-        },
-        url: server + '/business-central/rest/runtime/' + processDeployment + '/process/' + processDefinitionID + '/start',
-        data: {
-            "map_cod_cliente": '"' + clienteID + '"',
-            "map_dir_correo": correo
-        },
-        success: function (data) {
-            console.log('Proceso creado con ID: ' + data.id);
-            //console.log(data.id);
-            //processID = data.id;
-        },
-        error: function () {
-            console.log('Error creando proceso')
-        }
-    })
-}
+//$.iniciaProcesoEmail = function (processDefinitionID, processDeployment, clienteID, correo) {
+//    $.ajax({
+//        type: 'POST',
+//        xhrFields: {
+//            withCredentials: true,
+//        },
+//        cache: true,
+//        dataType: 'json',
+//        beforeSend: function (xhr) {
+//            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(window.usuario + ':' + window.passwd));
+//        },
+//        url: server + '/business-central/rest/runtime/' + processDeployment + '/process/' + processDefinitionID + '/start',
+//        data: {
+//            "map_cod_cliente": '"' + clienteID + '"',
+//            "map_dir_correo": correo
+//        },
+//        success: function (data) {
+//            console.log('Proceso creado con ID: ' + data.id);
+//            //console.log(data.id);
+//            //processID = data.id;
+//        },
+//        error: function () {
+//            console.log('Error creando proceso')
+//        }
+//    })
+//}
 
 
 var iniciaProceso = function (processDefinitionID, processDeployment, dataMappings) {
