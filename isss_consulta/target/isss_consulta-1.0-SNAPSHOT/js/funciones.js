@@ -143,7 +143,7 @@ var cargaCredenciales = function (esIndex) {
 var botonSiguiente = function (processIDparam, dataArray) {
     var pasoSiguiente = $("#paso_siguiente").val();
     //si es el boton Siguiente de la primera pantalla el idCliente se toma de un Div, para todos los demas se toma de la URL.
-    if (!$("#clientes_clienteId").val()) {//paso 2 en adelante
+    if (!$("#clientes_numeroAfiliacion").val()) {//paso 2 en adelante
         var codigoCliente = $.urlParam("clientesID");
         //finalizo la tarea, taskID la seteo en la funcion iniciaTarea al cargar cada pagina.
         completaTarea(taskID, processid, dataArray);
@@ -152,14 +152,19 @@ var botonSiguiente = function (processIDparam, dataArray) {
         window.location = pasoSiguiente + "?processid=" + processid + "&clientesID=" + codigoCliente;
     }
     else {//Caso: Boton siguiente paso 1
-        var codigoCliente = $("#clientes_clienteId").val();
+        var codigoCliente = $("#clientes_numeroAfiliacion").val();
         //alert('Boton Siguiente paso 1, codigoCliente=' + codigoCliente);
         window.location = pasoSiguiente + "?processid=" + processIDparam + "&clientesID=" + codigoCliente;
     }
 };
 
 var botonSiguientePaso1 = function () {//Inicio un proceso.
-    iniciaProceso(processDefinitionID, processDeployment);
+    var parametros = {
+        "map_afiliadoID": '"' + $('#clientes_numeroAfiliacion').val() + '"',
+        "map_DUI": '"' + $('#clientes_DUI').val() + '"',
+        "map_nombreAfiliado": '"' + $('#clientes_nombreAfiliado').val() + '"'
+    };
+    iniciaProceso(processDefinitionID, processDeployment, parametros);
 };
 
 //Equivalente a botonSiguiente paso 3
