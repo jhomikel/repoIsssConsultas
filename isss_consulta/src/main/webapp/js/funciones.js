@@ -106,8 +106,8 @@ var cargaCredenciales = function (esIndex) {
         console.log("LS Usuario: " + localStorage.getItem("usuarioAPP"));
         console.log("LS Rol: " + localStorage.getItem("rolAPP"));
         //hago la distincion si debo cargar la opcion de los procesos o no (en el menu)
-        if (localStorage.getItem("rolAPP") == 'user'){//cargo el menu de procesos
-            $('#procesorenovaciones').html('<li><h2><span class="glyphicon glyphicon-cog"></span> Procesos</h2></li><li><a href="../renovaciones/01-busqueda-afiliado.html">Renovaciones</a></li>');
+        if (localStorage.getItem("rolAPP") == 'recepcionista'){//cargo el menu de procesos
+            $('#procesolista').html('<li><h2><span class="glyphicon glyphicon-cog"></span> Procesos</h2></li><li><a href="../consulta/01-busqueda-afiliado.html">Consulta Externa</a></li>');
         }
         //Seteo el usuario en la parte superior derecha
         window.usuario = localStorage.getItem("usuarioAPP");

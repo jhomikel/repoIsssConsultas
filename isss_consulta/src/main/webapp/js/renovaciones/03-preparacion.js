@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
-    //cargaCredenciales();
-    //cargaPaginaIniciaTarea();
-    //obtieneNombreCliente(codigoCliente);
-    //obtieneDetallesInstanciaProceso($.urlParam('processid'));
+    cargaCredenciales();
+    cargaPaginaIniciaTarea();
+    obtieneNombreCliente($.urlParam('clientesID'));
+    obtieneDetallesInstanciaProceso($.urlParam('processid'));
     
     $("#btnSiguiente").click(function(){
         
@@ -40,10 +40,10 @@ $(document).ready(function(){
           }
 
           $.ajax(settings).done(function (response) {
-            alert('Signos ingresados satisfactoriamente');
+              alert('Signos ingresados satisfactoriamente');
+              botonSiguiente($.urlParam('processid'), '');
           });
         
-        //Operación botón siguiente
     });
 
     $("#btnTerminar").click(function () {

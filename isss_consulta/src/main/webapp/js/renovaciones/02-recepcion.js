@@ -86,7 +86,7 @@ $(document).ready(function () {
                     parametros = {
                         "map_Preparacion": 'No'
                     };
-                    $("#paso_siguiente").val('04-historial.html');
+                    //$("#paso_siguiente").val('04-historial.html');
                 }
                 console.log(parametros);
                 //alert('stop');
