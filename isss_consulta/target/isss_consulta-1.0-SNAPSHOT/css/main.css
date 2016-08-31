@@ -5876,6 +5876,11 @@ table a {
   width: 100%;
   z-index: 50;
   border-bottom: solid 3px #0e278a; }
+  
+#app-header img{
+	max-height: 45px;
+	width:auto;
+}
 
 #dash-bt1 {
   right: 400px; }
@@ -5953,7 +5958,7 @@ table a {
   background-color: #BBB;
   border: solid 3px #999; }
 
-.activo.numero-paso {
+.activo .numero-paso {
   background-color: #164882;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: white;
@@ -6004,7 +6009,8 @@ label {
   border-radius: 0 5px 5px 0;
   position: relative;
   top: 5px; }
-  #simple-menu span:hover {
+
+#simple-menu span:hover {
     background-color: #1A5FAD; }
 
 .portlet {

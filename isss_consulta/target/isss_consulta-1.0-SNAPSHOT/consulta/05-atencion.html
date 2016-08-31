@@ -14,6 +14,8 @@
         <meta name="description" content="			ID de la solicitud						Salario						Bonificaciones						Gasolina						Vi&aacute;ticos						Horas extra						Intereses y alquileres						Dividendos						I...">
 
         <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/typeHead.css">
+        
     </head>
 
 
@@ -88,49 +90,132 @@
                                 <div class="info-pasos">
                                     <h3>Paso <span class="numero-paso activo">5</span> de 7 : Atenci&oacute;n medica</h3>
                                 </div>
-                            </div>
+                            </div>                                                    
                         </div>
 
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="detalle-cliente">Consulta externa para el afiliado: <span id="nombre_cliente"></span>&nbsp;<span id="apellido_cliente"></span></div>
-                            </div>
+                            </div>                                                        
                         </div>
-
-
+                        
                         <div class="row">
                                 <div class="col-md-10 col-md-offset-1">
                                 <div class="formulario">
+                                    <br><br>
                                     <div id="atencion"></div>
-                                    <br><br>
-                                    <div id="diagnostico">
-                                        <div class="table-responsive">
-                                            
-                                            <table class="tablasJSON table table-striped">
-                                                <caption class=encabezado><h3>Diagnosticos de la consulta</h3></caption>
-                                                <thead>                                                    
-                                                    <tr>
-                                                        <th>Codigo</th>
-                                                        <th>Tipo</th>
-                                                        <th>Principal</th>
-                                                        <th>Servicio</th>
-                                                        <th>Diagnostico</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                </div>
+                                    
+                            <div class="container">
+                                <h3>Registrar la atenci&oacute;n</h3>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#home">Tipos de diagn&oacute;stico</a></li>
+                                        <li><a data-toggle="tab" href="#menu1">Diagn&oacute;stico</a></li>
+                                      <li><a data-toggle="tab" href="#menu2">Prescripci&oacute;n</a></li>
+                                      <li><a data-toggle="tab" href="#menu3">Solicitar incapacidad</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                      <div id="home" class="tab-pane fade in active">
+                                        <h3>Tipos de diagn&oacute;stico</h3>
+                                        <br>
+                                            <form>                                                
+                                                <label>Seleccione un tipo de diagn&oacute;stico</label>
+                                                <br>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Clinico">Diagnóstico clínico o individual</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Certeza">Diagnóstico de certeza</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Diferencial">Diagnóstico diferencial</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Etiologico">Diagnóstico etiológico</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Generico">Diagnóstico genérico</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Sintomatico">Diagnóstico sintomático</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Historico">Diagnóstico historico</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Lesionado">Diagnóstico lesional, anatómico o topográfico</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">                                        
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Nosologico">Diagnóstico nosológico</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Patogenico">Diagnóstico patogenético</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Presuntivo">Diagnóstico presuntivo</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Sindromico">Diagnóstico sindrómico y funcional</label>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                      </div>
+                                      <div id="menu1" class="tab-pane fade">
+                                        <h3>Diagn&oacute;stico</h3>
+                                        <br>                                          
+                                        <form>
+                                            <div class="col-md-5 col-md-offset-1"> 
+                                                
+                                                <div class="form-group">
+                                                    <label for="txtCodDiagnostico">Diagn&oacute;stico (CIE10)</label>
+                                                    <input type="text" id="txtCodDiagnostico" class="typeahead tt-query" autocomplete="off" spellcheck="false">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtObservaciones">Observaciones</label>
+                                                    <textarea id="txtObservaciones" class="form-control" rows="5" id="comment"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-md-offset-1"> 
+                                                <div class="form-group">
+                                                    <label for="selPrincipal">Seleccione la periodicidad:</label>
+                                                    <select class="form-control" id="selPrincipal">
+                                                        <option value="sel">Seleccione</option>
+                                                        <option value="PR">Principal</option>
+                                                        <option value="AN">Antecedente</option>
+                                                        <option value="PV">Primera vez</option>
+                                                        <option value="CE">Causa externa</option>
+                                                    </select>
+                                                  </div>
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-floppy-save"></span> Insertar
+                                                      </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                      </div>
+                                      <div id="menu2" class="tab-pane fade">
+                                        <h3>Prescripci&oacute;n</h3>
+                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                      </div>
+                                      <div id="menu3" class="tab-pane fade">
+                                        <h3>Solicitar incapacidad</h3>
+                                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                      </div>
                                     </div>
-                                    <br><br>
-                                    <div id="pronostico"></div>
-
-                                </div>
-                                </div>
+                                  </div>        
+                                    
+                                </div>                                          
                         </div>
-
-                        
+                   
                         
                         <div class="row">
                             <div class="botones-proceso">
@@ -144,7 +229,7 @@
                                 <div class="col-md-3 col-md-offset-4">
                                     <form>
                                         <div class="form-group pull-right">
-                                            <input type="button" name="btnSiguiente" id="btnSiguiente" value="Siguiente" class="btn btn-danger"/>
+                                            <input type="button" name="btnSiguiente" id="btnSiguiente" value="Ingresar tipo" class="btn btn-danger"/>
                                         </div>
                                     </form>
                                 </div>
@@ -176,9 +261,7 @@
         <script src="../js/renovaciones/bpms.js"></script>
 
         <script src="../js/renovaciones/05-atencion.js" type="text/javascript"></script>
-
-
-
+        <script src="../js/typeahead.min.js"></script>
 
     </body>
 

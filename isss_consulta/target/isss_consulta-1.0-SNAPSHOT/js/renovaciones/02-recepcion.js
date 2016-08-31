@@ -36,9 +36,9 @@ $(document).ready(function () {
             html += '<tr><td>Clinica de la cita</td><td>' + datos[i].clinica + '</td></tr>';
             html += '<tr><td>Especialidad</td><td>' + datos[i].codmedico.codespecialidad.nombespecialidad + '</td></tr>';
             html += '<tr><td>Nombre del medico</td><td>' + datos[i].codmedico.nombres + '</td></tr>';
-            html += '<tr><td>Apellido del medico</td><td>' + datos[i].codmedico.apellidos + '</td></tr>';
-            html += '</table>';
+            html += '<tr><td>Apellido del medico</td><td>' + datos[i].codmedico.apellidos + '</td></tr>';            
         });
+        html += '</table>';
         html += '</div>';
         document.getElementById('citas').innerHTML = html;
 

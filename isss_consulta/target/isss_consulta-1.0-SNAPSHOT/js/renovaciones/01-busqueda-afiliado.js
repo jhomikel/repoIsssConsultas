@@ -15,7 +15,13 @@ $(document).ready(function () {
     function mostrarDatosAfiliado(datos) {
         html = '<div class="table-responsive"><table class="table table-striped">';
         html += '<caption class="encabezado">DATOS ENCONTRADOS</caption>';
-        html += '<tbody><tr><td>Numero de afiliaci&oacute;n:</td><td id="cliente_numeroAfiliacion">' + datos[0].numafiliacion.numafiliacion + '</td></tr>';
+        html += '<tbody>';
+        if(datos[0].numafiliacion.sexo === 'M'){
+            html += '<tr><td rowspan="10"><img src="../images/hombre_foto.jpg"></td></tr>';
+        } else {
+            html += '<tr><td rowspan="10"><img src="../images/mujer_foto.jpg"></td></tr>';
+        }
+        html += '<tr><td>Numero de afiliaci&oacute;n:</td><td id="cliente_numeroAfiliacion">' + datos[0].numafiliacion.numafiliacion + '</td></tr>';
         html += '<tr><td>Nombres:</td><td>' + datos[0].numafiliacion.nombres + '</td></tr>';
         html += '<tr><td>Apellidos:</td><td>' + datos[0].numafiliacion.apellidos + '</td></tr>';
         html += '<tr><td id="cliente_DUI">DUI:</td><td>' + datos[0].numafiliacion.dui + '</td></tr>';
@@ -24,10 +30,11 @@ $(document).ready(function () {
         html += '<tr><td>Departamento:</td><td>' + datos[0].numafiliacion.departamento + '</td></tr>';
         html += '<tr><td>Municipio:</td><td>' + datos[0].numafiliacion.municipio + '</td></tr>';
         html += '<tr><td>Direcci&oacute;n:</td><td>' + datos[0].numafiliacion.direccion + '</td></tr>';
-        html += '<tr><td colspan=2 align=center>CITAS PENDIENTES</td></tr>';
+        html += '<tr><td colspan=3 align=center>CITAS PENDIENTES</td></tr>';
         $.each(datos, function (i, value) {
             html += '<tr><td>Cita ' + datos[i].codcita + '</td>';
-            html += '<td>' + datos[i].fechacita + ' - ' + datos[i].horacita + '</td>';
+            html += '<td>' + datos[i].fechacita + '</td>';
+            html += '<td>' + datos[i].horacita + '</td>';
             html += '</tr>';
         });
         html += '</tbody></table></div>';
