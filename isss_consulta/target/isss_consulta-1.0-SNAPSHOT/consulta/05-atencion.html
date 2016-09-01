@@ -123,6 +123,9 @@
 
                                     <div class="tab-content">
                                       <div id="home" class="tab-pane fade in active">
+                                         <div class="form-group pull-right">
+                                                <a data-toggle="tab" href="#menu1">Siguiente <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
                                         <h3>Tipos de diagn&oacute;stico</h3>
                                         <br>
                                             <form>                                                
@@ -169,11 +172,17 @@
                                                     <div class="radio">
                                                         <label><input type="radio" name="opTipoDiag" id="opTipoDiag" value="Sindromico">Diagnóstico sindrómico y funcional</label>
                                                     </div>
-                                                </div>
-
+                                                </div>                                                    
                                             </form>
+                                        
                                       </div>
                                       <div id="menu1" class="tab-pane fade">
+                                          
+                                        <div class="form-group pull-right">
+                                            <a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-chevron-left"></span> Anterior</a> |
+                                            <a data-toggle="tab" href="#menu2">Siguiente <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
+                                          
                                         <h3>Diagn&oacute;stico</h3>
                                         <br>                                          
                                         <form>
@@ -209,6 +218,10 @@
                                         
                                       </div>
                                       <div id="menu2" class="tab-pane fade">
+                                        <div class="form-group pull-right">
+                                            <a data-toggle="tab" href="#menu1"><span class="glyphicon glyphicon-chevron-left"></span> Anterior</a> |
+                                            <a data-toggle="tab" href="#menu3">Siguiente <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
                                         <h3>Adjuntar archivos</h3>
                                         <br>
                                         <form enctype="multipart/form-data">
@@ -219,6 +232,9 @@
                                         </form>
                                       </div>
                                       <div id="menu3" class="tab-pane fade">
+                                        <div class="form-group pull-right">
+                                            <a data-toggle="tab" href="#menu2"><span class="glyphicon glyphicon-chevron-left"></span> Anterior</a>
+                                        </div>
                                         <h3>Preescripci&oacute;n medica</h3>
                                         <br>
                                         <div class="table-responsive">
@@ -307,7 +323,7 @@
                                 <div class="col-md-3 col-md-offset-4">
                                     <form>
                                         <div class="form-group pull-right">
-                                            <input type="button" name="btnSiguiente" id="btnSiguiente" value="Ingresar tipo" class="btn btn-danger"/>
+                                            <input type="button" name="btnSiguiente" id="btnSiguiente" value="Finalizar" class="btn btn-danger"/>
                                         </div>
                                     </form>
                                 </div>

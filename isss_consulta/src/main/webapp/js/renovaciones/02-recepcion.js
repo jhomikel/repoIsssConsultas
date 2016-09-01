@@ -10,6 +10,7 @@ $(document).ready(function () {
     //var codigoAfiliado = $.urlParam('clientesID');
     //var varsFrecuentes = "?processid=" + processid + "&afiliadoID=" + codigoAfiliado;
     var codigoCita = 0;
+    var edadAfiliado = 0;
     
     var fecha = new Date();
     var fechaSttr = '<h2>Cita programada: ' + fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear() + '</h2>';
@@ -36,7 +37,9 @@ $(document).ready(function () {
             html += '<tr><td>Clinica de la cita</td><td>' + datos[i].clinica + '</td></tr>';
             html += '<tr><td>Especialidad</td><td>' + datos[i].codmedico.codespecialidad.nombespecialidad + '</td></tr>';
             html += '<tr><td>Nombre del medico</td><td>' + datos[i].codmedico.nombres + '</td></tr>';
-            html += '<tr><td>Apellido del medico</td><td>' + datos[i].codmedico.apellidos + '</td></tr>';            
+            html += '<tr><td>Apellido del medico</td><td>' + datos[i].codmedico.apellidos + '</td></tr>';  
+            edadAfiliado = datos[i].numafiliacion.edad;
+            console.log("Edad del afiliado: " + edadAfiliado);
         });
         html += '</table>';
         html += '</div>';

@@ -24,21 +24,24 @@ $(document).ready(function() {
       $.ajax(settingAfiliado).done(function (datos) {
         console.log("Datos encontrados " + datos.length);
         html = '<div class="table-responsive"><table id="tblHistorico" class="tablasJSON table table-striped">';
-        html += '<caption class=encabezado><h3>Historico del afiliado '+ datos[0].codcita.numafiliacion.numafiliacion +'</h3></caption>';
+        html += '<caption class=encabezado><h3>Ultimas 10 consultas del afiliado '+ datos[0].codcita.numafiliacion.numafiliacion +'</h3></caption>';
         html += '<thead><tr>'
         html += '<th>Codigo</th>';
         html += '<th>Fecha</th>';
         html += '<th>Tipo</th>';
         html += '<th>Medico</th>';
         html += '</tr></thead>';
+        html += '<tbody>';
         $.each(datos, function (i, value) {
-            html += '<tbody><tr>';
+            html += '<tr>';
             html += '<td>'+ datos[i].codatencion +'</td>';
             html += '<td>'+ datos[i].fechaatencion +'</td>';
             html += '<td>'+ datos[i].tipohoja +'</td>';
             html += '<td>'+ datos[i].codcita.codmedico.nombres +' '+ datos[i].codcita.codmedico.apellidos +'</td>';
-            html += '</tr></tbody>';
+            html += '</tr>';
         });
+        html += '<tr><td colspan="4" align="center"><br><br><a href="#">Ver historico completo</a></td></tr>'
+        html += '</tbody>';
         html += '</table>';
         html += '</div>';
         
