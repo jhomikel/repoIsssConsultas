@@ -1,44 +1,49 @@
 $(document).ready(function(){
 
-    cargaCredenciales();
-    cargaPaginaIniciaTarea();
-    obtieneNombreCliente(codigoCliente);
-    obtieneDetallesInstanciaProceso($.urlParam('processid'));
-	
-    $("#salario").jStepper();
-    $("#comisiones").jStepper();
-    $("#ingremesas").jStepper();
-    $("#horasextra").jStepper();
-    $("#interesesyalquileres").jStepper();
-    $("#dividendos").jStepper();
-    $("#otros").jStepper();
-    $("#gastosdevida").jStepper();
-    $("#dctoley").jStepper();
-    $("#otrosegresos").jStepper();
-
-	//var urlExterno = $("#direccion_url").val();
-	//var varsFrecuentes = "?processid=" + processid + "&clientesID=" + codigoCliente;
-	//var iframeUrl = urlExterno + varsFrecuentes;
-
+    //cargaCredenciales();
+    //cargaPaginaIniciaTarea();
+    //obtieneNombreCliente(codigoCliente);
+    //obtieneDetallesInstanciaProceso($.urlParam('processid'));
+    
+    var codAtencion = $.urlParam('processid');
+    
+    var fecha = new Date();
+    var fechaSttr = fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear();
+    $("#txtFechaIni").val(fechaSttr);
+    
     $("#btnSiguiente").click(function(){
-        //console.log('click en siguiente');
-        var ingresosEgresos = {
-            'map_salario': $("#salario").val(),
-            'map_comisiones': $("#comisiones").val(),
-            'map_ingreso_remesas': $("#ingremesas").val(),
-            'map_horas_extra': $("#horasextra").val(),
-            'map_intereses_alquileres': $("#interesesyalquileres").val(),
-            'map_dividendos': $("#dividendos").val(),
-            'map_otros': $("#otros").val(),
-            'map_gastos_vida': $("#gastosdevida").val(),
-            'map_descuentos_ley': $("#dctoley").val(),
-            'map_otros_egresos': $("#otrosegresos").val()
-        }
+        var dias = $("#txtNDias").val();
+        var dirigidoa = $("#txtDirigidoA").val();
+        var motivo = $("#txtMotivo").val();
+        console.log(dias);
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.incapacidad",
+            "method": "POST",
+            "headers": {
+              "content-type": "application/json",
+              "cache-control": "no-cache",
+              "postman-token": "b7a39788-6140-0ad5-68c9-6f0d2f5f7d3b"
+            },
+            "processData": false,
+            "data": "{\n\
+                        \"fechaini\": \""+ fecha.getTime() +"\",\n\
+                        \"dias\": "+ dias +",\n\
+                        \"dirigidoa\": \""+ dirigidoa +"\",\n\
+                        \"motivo\": \""+ motivo +"\",\n\
+                        \"codatencion\": {\n\
+                            \"codatencion\": "+ codAtencion +"\n\
+                        }\n\
+                    }"
+          }
 
-        //console.log(ingresosEgresos);
-
-        botonSiguiente('', ingresosEgresos);
+          $.ajax(settings).done(function (response) {
+            alert('La incapacidad fue registrada satisfactoriamente');
+          });
+        
     } );
-	$("#btnTerminar").click($.botonTerminar);
+    
+    $("#btnTerminar").click($.botonTerminar);
 
 });

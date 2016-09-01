@@ -1,16 +1,60 @@
 $(document).ready(function () {
 
     cargaCredenciales();
+    
+    var SelectNumAfiliado = '';
 
     $("#afiliado_num").jStepper();
     $("#btnBuscar").click(function () {
-        var afiliadonum = $("#afiliado_num").val();
+        SelectNumAfiliado = $("#afiliado_num").val();
         var jsonUrl = "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/afiliado/";
-        if (afiliadonum.length > 0) {
-            $.getJSON(jsonUrl + afiliadonum,
+        if (SelectNumAfiliado.length > 0) {
+            $.getJSON(jsonUrl + SelectNumAfiliado,
                     mostrarDatosAfiliado);
         }
     });
+    
+    var fecha = new Date();
+    var fechaSttr = '' + fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear() + '</h2>';
+    document.getElementById('fechaCitaBusqueda').innerHTML = fechaSttr;
+    
+    var settingsCitasDiarias = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/citasAhora",
+        "method": "GET",
+        "headers": {
+          "content-type": "application/json",
+          "cache-control": "no-cache",
+          "postman-token": "e99413ae-71f1-1772-9825-949c1cdfa87b"
+        },
+        "processData": false,
+        "data": ""
+      }
+
+      $.ajax(settingsCitasDiarias).done(function (responseAfiliado) {
+          html2 = '';
+          $.each(responseAfiliado, function (j, value) {
+             html2 += '<tr>'; 
+             html2 += '<td>'+ responseAfiliado[j].numafiliacion.numafiliacion +'</td>';
+             html2 += '<td>'+ responseAfiliado[j].numafiliacion.apellidos +'</td>';
+             html2 += '<td>'+ responseAfiliado[j].numafiliacion.nombres +'</td>';
+             html2 += '<tr>'; 
+          });
+          document.getElementById('tblBodyCitas').innerHTML = html2;
+          
+          $('table tbody tr').click(function(){
+            SelectNumAfiliado = $(this).find("td").eq(0).text();
+            console.log(SelectNumAfiliado);
+            var jsonUrl = "http://192.168.56.102:8080/ISSS_Servicios/webresources/entidades.cita/afiliado/";
+            if (SelectNumAfiliado.length > 0) {
+                $.getJSON(jsonUrl + SelectNumAfiliado,
+                        mostrarDatosAfiliado);
+            }
+        });
+      });
+    
+    
 
     function mostrarDatosAfiliado(datos) {
         html = '<div class="table-responsive"><table class="table table-striped">';

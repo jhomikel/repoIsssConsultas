@@ -10,11 +10,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Renovaciones contratos pospago</title>
+        <title>ISSS - Consulta Externa</title>
         <meta name="description" content="			ID de la solicitud						Salario						Bonificaciones						Gasolina						Vi&aacute;ticos						Horas extra						Intereses y alquileres						Dividendos						I...">
 
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/typeHead.css">
+        <link rel="stylesheet" href="../css/fileinput.css">
+        <style>
+            table tbody tr:hover {
+                cursor: pointer;
+            }
+        </style>
         
     </head>
 
@@ -111,8 +117,8 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a data-toggle="tab" href="#home">Tipos de diagn&oacute;stico</a></li>
                                         <li><a data-toggle="tab" href="#menu1">Diagn&oacute;stico</a></li>
-                                      <li><a data-toggle="tab" href="#menu2">Prescripci&oacute;n</a></li>
-                                      <li><a data-toggle="tab" href="#menu3">Solicitar incapacidad</a></li>
+                                      <li><a data-toggle="tab" href="#menu2">Adjuntar archivos</a></li>
+                                      <li><a data-toggle="tab" href="#menu3">Preescripci&oacute;n</a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -179,7 +185,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="txtObservaciones">Observaciones</label>
-                                                    <textarea id="txtObservaciones" class="form-control" rows="5" id="comment"></textarea>
+                                                    <textarea id="txtObservaciones" class="form-control" rows="5"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-md-offset-1"> 
@@ -194,8 +200,8 @@
                                                     </select>
                                                   </div>
                                                 <div class="form-group">
-                                                    <button type="button" class="btn btn-default">
-                                                        <span class="glyphicon glyphicon-floppy-save"></span> Insertar
+                                                    <button type="button" class="btn btn-default" id="btnInsertarDiagnostico">
+                                                        <span class="glyphicon glyphicon-floppy-save"></span> Insertar diagnostico
                                                       </button>
                                                 </div>
                                             </div>
@@ -203,12 +209,33 @@
                                         
                                       </div>
                                       <div id="menu2" class="tab-pane fade">
-                                        <h3>Prescripci&oacute;n</h3>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                        <h3>Adjuntar archivos</h3>
+                                        <br>
+                                        <form enctype="multipart/form-data">
+                                            <input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="reset" class="btn btn-default">Reset</button>
+                                        </form>
                                       </div>
                                       <div id="menu3" class="tab-pane fade">
-                                        <h3>Solicitar incapacidad</h3>
-                                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                        <h3>Preescripci&oacute;n medica</h3>
+                                        <br>
+                                        <div class="table-responsive">
+                                            <table id="tblPrescripcion" class="tablasJSON table table-striped">
+                                                <caption><h4>Diagnosticos de la consulta</h4></caption>
+                                                <thead>
+                                                    <th>Codido</th>
+                                                    <th>Tipo</th>
+                                                    <th>Periodicidad</th>
+                                                    <th>Diagnostico</th>
+                                                    <th>Observaciones</th>
+                                                </thead>
+                                                <tbody id="tblBodyPrescripcion">
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>        
@@ -216,6 +243,57 @@
                                 </div>                                          
                         </div>
                    
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <!-- Modal diagnostico -->
+                                <div class="modal fade" id="myModalPrescripcion" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Prescripción para el diagnostico <b id="codDetDiagnistico"></b></h4>
+                                                
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="table-responsive">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="txtFechaIni">Fecha de inicio</label>
+                                                            <input type="date" id="txtFechaIni" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="txtFechaFin">Fecha de fin</label>
+                                                            <input type="date" id="txtFechaFin" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="selTipoPrescripcion">Seleccione el tipo de servicio</label>
+                                                            <select class="form-control" id="selTipoPrescripcion">
+                                                                <option value="sel">Seleccione</option>
+                                                                <option value="MEDICINA">Medicamento</option>
+                                                                <option value="EXAMEN">Examen</option>
+                                                            </select>
+                                                          </div>
+                                                        <div id="comboMedicamento" class="form-group">
+                                                            <label for="selDescMedicamento">Seleccione el Examen/Medicamento</label>
+                                                            <select class="form-control" id="selDescMedicamento">
+                                                                <option value="sel">Seleccione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="txtCantidad">Cantidad de medicamento</label>
+                                                            <input type="text" id="txtCantidad" class="form-control">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnInsertarPrescripcion">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                               
+                        </div>
                         
                         <div class="row">
                             <div class="botones-proceso">
@@ -259,6 +337,8 @@
         <!-- DIGICEL -->
         <script src="../js/funciones.js"></script>
         <script src="../js/renovaciones/bpms.js"></script>
+        <script src="../js/fileinput.js"></script>
+        <script src="../js/locales/es.js"></script>
 
         <script src="../js/renovaciones/05-atencion.js" type="text/javascript"></script>
         <script src="../js/typeahead.min.js"></script>

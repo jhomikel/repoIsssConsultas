@@ -10,10 +10,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Renovaciones contratos pospago</title>
+  <title>ISSS - Consulta Externa</title>
   <meta name="description" content="numafiliacion">
 
   <link rel="stylesheet" href="../css/main.css">
+    <style>
+            table tbody tr:hover {
+                cursor: pointer;
+            }
+    </style>
 </head>
 
 
@@ -56,7 +61,7 @@
 			<div class="col-md-12 main">
 				<div class="row">
 					<div class="col-md-9">
-							<h1>CONSULTA EXTERNA - ISSS hola 2</h1>
+							<h1>CONSULTA EXTERNA - ISSS</h1>
 					</div>
 					
 					<div class="col-md-3">
@@ -98,7 +103,7 @@
 
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
-		<div class="detalle-cliente">Afiliado: <span id="nombre_cliente"></span>&nbsp;<span id="apellido_cliente"></span></div>
+		<div class="detalle-cliente"><span>Busque la información del afiliado o seleccionelo de la lista de citas para este día</span></div>
 	</div>
 </div>
 
@@ -106,11 +111,26 @@
 
 <div class="row">
 		<div class="col-md-5 col-md-offset-1">
+                   
 	<form action="">
 		<div id="formulario-renovacion-1" class="form-group">
-			<label for="afiliado_num">NUMERO DE AFILIACION</label>
+			<label for="afiliado_num">Ingrese el numero de afiliación / DUI</label>
 			<input class="form-control" type="text" id="afiliado_num" name="afiliado_num" tabindex="1" />
 		</div>
+                <div class="table-responsive">                   
+                    <table id="tblCitas" class="tablasJSON table table-striped">
+                        <caption><h4>Citas programadas para <b id="fechaCitaBusqueda"></b></h4></caption>
+                        
+                        <thead>
+                            <th>Numero Afiliación</th>
+                            <th>Apellidos</th>
+                            <th>Nombres</th>
+                        </thead>
+                        <tbody id="tblBodyCitas">
+                                                    
+                        </tbody>
+                    </table>
+                </div>
 	</form>
 </div>
 <div class="col-md-5">

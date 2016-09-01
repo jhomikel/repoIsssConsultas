@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
     // Cargar credenciales
-    cargaCredenciales();
-    cargaPaginaIniciaTarea();
-    obtieneNombreCliente($.urlParam('clientesID'));
-    obtieneDetallesInstanciaProceso($.urlParam('processid'));
+    //cargaCredenciales();
+    //cargaPaginaIniciaTarea();
+    //obtieneNombreCliente($.urlParam('clientesID'));
+    //obtieneDetallesInstanciaProceso($.urlParam('processid'));
 
     //var processid = $.urlParam('processid');
     //var codigoAfiliado = $.urlParam('clientesID');
