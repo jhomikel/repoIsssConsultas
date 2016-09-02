@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
-    //cargaCredenciales();
-    //cargaPaginaIniciaTarea();
-    //obtieneNombreCliente(codigoCliente);
-    //obtieneDetallesInstanciaProceso($.urlParam('processid'));
+    cargaCredenciales();
+    cargaPaginaIniciaTarea();
+    obtieneNombreCliente($.urlParam('clientesID'));
+    obtieneDetallesInstanciaProceso($.urlParam('processid'));
     
     var codAtencion = $.urlParam('processid');
     
@@ -39,7 +39,8 @@ $(document).ready(function(){
           }
 
           $.ajax(settings).done(function (response) {
-            alert('La incapacidad fue registrada satisfactoriamente');
+              alert('La incapacidad fue registrada satisfactoriamente');
+              botonSiguiente($.urlParam('processid'), '');
           });
         
     } );

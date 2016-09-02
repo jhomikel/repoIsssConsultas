@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-    //cargaCredenciales();
-    //cargaPaginaIniciaTarea();
-    //obtieneNombreCliente(codigoCliente);
-    //obtieneDetallesInstanciaProceso($.urlParam('processid'));
+    cargaCredenciales();
+    cargaPaginaIniciaTarea();
+    obtieneNombreCliente($.urlParam('clientesID'));
+    obtieneDetallesInstanciaProceso($.urlParam('processid'));
     
     var numAfiliado = $.urlParam('clientesID');
     
