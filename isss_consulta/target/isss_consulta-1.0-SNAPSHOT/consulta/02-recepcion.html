@@ -26,9 +26,7 @@
         <li><a href="../tareas/tareas-pendientes.html">Tareas pendientes</a></li>
         <li><a href="../tareas/tareas-proceso.html">Tareas en proceso</a></li>
 	</ul>
-	<ul>
-		<li><h2><span class="glyphicon glyphicon-cog"></span> Procesos</h2></li>
-		<li><a href="../renovaciones/01-busqueda-clientes.html">Renovaciones</a></li>
+	<ul id="procesolista">
 	</ul>
 	<ul class="visible-xs-block">
 		<li><h2><span class="glyphicon glyphicon-cog"></span> Herramientas</h2></li>
@@ -74,7 +72,7 @@
 <input type="hidden" id="numafiliacion" name="numafiliacion" value=""/>
 <input type="hidden" id="proccessid" name="proccessid" value=""/>
 
-<input type="hidden" name="paso_siguiente" id="paso_siguiente" value="03-solicitud-renovacion.html">
+<input type="hidden" name="paso_siguiente" id="paso_siguiente" value="../tareas/tareas-pendientes.html">
 
 
                         <div class="row">
@@ -90,7 +88,7 @@
 
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
-		<div class="detalle-cliente">Consulta externa para el afiliado: <span id="nombre_afiliado"></span>&nbsp;<span id="apellido_afiliado"></span></div>
+		<div class="detalle-cliente">Consulta externa para el afiliado: <span id="nombre_cliente"></span>&nbsp;<span id="apellido_cliente"></span></div>
 	</div>
 </div>
 
@@ -151,27 +149,25 @@
 		</div>
 
 		<!-- JQUERY -->
-<script src="../js/jquery-2.2.3.min.js"></script>
-<!-- BOOTSTRAP , TOUR, MODAL -->
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-tour.min.js"></script>
-<script src="../js/eModal.min.js"></script>
-<script src="../js/alert.js"></script>
-<!-- MENU LATERAL -->
-<script src="../js/jquery.sidr.js"></script>
-<script src="../js/sidr.script.js"></script>
-<!-- RELOJ -->
-<script src="../js/countid.min.js"></script>
-<script src="../js/timer.js"></script>
-<!-- DIGICEL -->
-<script src="../js/funciones.js"></script>
-<script src="../js/renovaciones/bpms.js"></script>
-
-
-<script src="../js/renovaciones/02-recepcion.js" type="text/javascript"></script>
-
-
-
+            <script src="../js/jquery-2.2.3.min.js"></script>
+            <!-- BOOTSTRAP , TOUR, MODAL -->
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/bootstrap-tour.min.js"></script>
+            <script src="../js/eModal.min.js"></script>
+            <script src="../js/alert.js"></script>
+            <!-- MENU LATERAL -->
+            <script src="../js/jquery.sidr.js"></script>
+            <script src="../js/sidr.script.js"></script>
+            <!-- RELOJ -->
+            <script src="../js/countid.min.js"></script>
+            <script src="../js/timer.js"></script>
+            <!-- FUNCIONES UI -->
+            <script src="../js/funciones.js"></script>
+            <script src="../js/ui/commonUI.js" type="text/javascript"></script>
+            <script src="../js/mapa_formularios.js"></script>
+            <!-- BPMS API -->
+            <script src="../js/bpms.js" type="text/javascript"></script>
+            <script src="../js/renovaciones/02-recepcion.js" type="text/javascript"></script>
 
 	</body>
 
